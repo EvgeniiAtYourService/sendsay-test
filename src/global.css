@@ -18,6 +18,24 @@ body {
   width: 695px;
   height: 640px;
   background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 106px 0 86px 76px;
+}
+
+.rightPanel {
+  padding: 38px 80px 54px 0;
+}
+
+.smth {
+  width: 243px;
+  height: 547px;
+  background-color: grey;
 }
 
 .blockWrapper {

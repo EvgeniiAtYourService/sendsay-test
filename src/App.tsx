@@ -18,7 +18,7 @@ function App() {
         </Button>
       </div>
       <div className="rightPanel">
-        <p>12</p>
+        <div className="smth">123</div>
       </div>
     </div>
   )
