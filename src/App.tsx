@@ -5,7 +5,10 @@ import './global.css'
 function App() {
   return (
     <div className="App">
-      <Button size="s">123</Button>
+      <Button size="s">/</Button>
+      <Button size="m">7</Button>
+      <Button size="l">0</Button>
+      <Button size="equals">=</Button>
     </div>
   )
 }

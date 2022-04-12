@@ -11,6 +11,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  font-family: var(--inter);
 }
 
 .App {
@@ -23,5 +24,6 @@ body {
   --primary: #5d5fef;
   --light-grey: #6b7280;
   --dark-grey: #4d5562;
-  --grey-bg: #F3F4F6;
+  --grey-bg: #f3f4f6;
+  --inter: 'Inter', sans-serif;
 }

@@ -15,8 +15,7 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "react-hooks",
-    "plugin:@typescript-eslint/recommended"
+    "react-hooks"
   ],
   "rules": {
     "no-use-before-define": "off",
@@ -39,7 +38,7 @@
     "@typescript-eslint/no-shadow": ["error"],
     "max-len": ["warn", { "code": 80 }],
     "linebreak-style": 0,
-    "comma-dangle": ["error", "never"]
+    "comma-dangle": [2, "always-multiline"] 
   },
   "settings": {
     "import/resolver": {
