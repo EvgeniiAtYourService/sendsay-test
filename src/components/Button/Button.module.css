@@ -1,0 +1,18 @@
+.common {
+    height: 48px;
+    margin: 0 8px 8px 0; 
+}
+
+.s {
+    width: 52px;
+}
+.m {
+    width: 72px;
+}
+.l {
+    width: 152px;
+}
+.equals {
+    width: 232px;
+    height: 64px;
+}
