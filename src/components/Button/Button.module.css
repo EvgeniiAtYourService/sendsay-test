@@ -8,6 +8,8 @@
   font-family: var(--inter);
   font-weight: 500;
   color: black;
+  font-size: 14px;
+  line-height: 15px;
 }
 
 .common:active {
@@ -28,4 +30,9 @@
   height: 64px;
   color: white;
   background-color: var(--primary);
+  margin: 0;
+}
+
+.noRightMargin {
+  margin: 0 0 8px 0;
 }

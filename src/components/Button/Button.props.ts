@@ -4,4 +4,5 @@ export interface ButtonProps extends DetailedHTMLProps
 <ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     children: ReactNode
     size: 's' | 'm' | 'l' | 'equals'
+    noRightMargin?: boolean
 }
