@@ -47,7 +47,8 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "default-param-last": 0,
-    "react/destructuring-assignment": 0
+    "react/destructuring-assignment": 0,
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {

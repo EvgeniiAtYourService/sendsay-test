@@ -1,0 +1,8 @@
+.equals {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  display: inline-block;
+  padding: 4px;
+  margin-bottom: 12px;
+}

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 import { useActions } from '../../hooks/useActions'
 import styles from './Display.module.css'
-import { DisplayProps } from './Display.props'
 
-function Display({ value, onChange, className }: DisplayProps) {
+type DisplayProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>
+
+function Display({ value, onChange }: DisplayProps) {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('display')
@@ -12,7 +16,7 @@ function Display({ value, onChange, className }: DisplayProps) {
     leaveElement()
   }
   return (
-    <div className={className}>
+    <div className={styles.displayWrapper}>
       <input
         type="text"
         readOnly

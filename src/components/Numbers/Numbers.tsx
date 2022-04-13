@@ -2,9 +2,8 @@ import React from 'react'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 import styles from './Numbers.module.css'
-import NumbersProps from './Numbers.props'
 
-function Number({ className }: NumbersProps) {
+function Number() {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('numbers')
@@ -13,7 +12,7 @@ function Number({ className }: NumbersProps) {
     leaveElement()
   }
   return (
-    <div className={`${styles.numbers} ${className}`}>
+    <div className={styles.numbers}>
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
         <Button size="m">7</Button>
         <Button size="m">8</Button>

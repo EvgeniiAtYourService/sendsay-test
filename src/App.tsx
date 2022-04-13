@@ -11,10 +11,10 @@ function App() {
   return (
     <div className="App">
       <div className="leftPanel">
-        <Display value={0} className="blockWrapper" />
-        <Operations className="blockWrapper" />
-        <Numbers className="blockWrapper" />
-        <Equals className="blockWrapper" />
+        <Display value={0} />
+        <Operations />
+        <Numbers />
+        <Equals />
       </div>
       <div className="rightPanel">
         <Switcher />

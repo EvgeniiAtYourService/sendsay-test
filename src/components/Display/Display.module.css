@@ -1,3 +1,12 @@
+.displayWrapper {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  display: inline-block;
+  padding: 4px;
+  margin-bottom: 12px;
+}
+
 .display {
   background-color: var(--grey-bg);
   border: none;

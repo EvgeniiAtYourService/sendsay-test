@@ -1,10 +1,9 @@
 import React from 'react'
 import styles from './Operations.module.css'
 import Button from '../Button/Button'
-import OperationsProps from './Operations.props'
 import { useActions } from '../../hooks/useActions'
 
-function Operations({ className }: OperationsProps) {
+function Operations() {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('operations')
@@ -13,7 +12,7 @@ function Operations({ className }: OperationsProps) {
     leaveElement()
   }
   return (
-    <div className={`${styles.operations} ${className}`}>
+    <div className={styles.operations}>
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
         <Button size="s">/</Button>
         <Button size="s">x</Button>

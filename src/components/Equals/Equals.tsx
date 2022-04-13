@@ -1,9 +1,9 @@
 import React from 'react'
+import styles from './Equals.module.css'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
-import EqualsProps from './Equals.props'
 
-function Equals({ className }: EqualsProps) {
+function Equals() {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('equals')
@@ -12,9 +12,9 @@ function Equals({ className }: EqualsProps) {
     leaveElement()
   }
   return (
-    <div className={className}>
+    <div className={styles.equals}>
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
-        <Button size="equals">=</Button>
+        <Button size="xl">=</Button>
       </div>
     </div>
   )

@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ReactNode } from 'react'
 import classnames from 'classnames'
 import styles from './Button.module.css'
-import { ButtonProps } from './Button.props'
+
+interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  children: ReactNode
+  size: 's' | 'm' | 'l' | 'xl'
+  noRightMargin?: boolean
+}
 
 function Button({ children, size, onClick, noRightMargin }: ButtonProps) {
   const classes = classnames(styles.common, {
     [styles.s]: size === 's',
     [styles.m]: size === 'm',
     [styles.l]: size === 'l',
-    [styles.equals]: size === 'equals',
+    [styles.xl]: size === 'xl',
     [styles.noRightMargin]: noRightMargin,
   })
   return (
