@@ -21,7 +21,7 @@ function Button({
     return (
       <div className={className}>
         <button type="button" className={classes} onClick={onClick}>
-          {children}
+          =
         </button>
       </div>
     )
