@@ -5,6 +5,7 @@ import Display from './components/Display/Display'
 import Operations from './components/Operations/Operations'
 import './global.css'
 import Switcher from './components/Switcher/Switcher'
+import DragField from './components/DragField/DragField'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       </div>
       <div className="rightPanel">
         <Switcher />
-        <div className="dragField">123</div>
+        <DragField />
       </div>
     </div>
   )

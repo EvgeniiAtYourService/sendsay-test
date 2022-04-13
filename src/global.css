@@ -32,12 +32,6 @@ body {
   padding: 38px 80px 54px 0;
 }
 
-.dragField {
-  background-color: red;
-  width: 243px;
-  height: 480px;
-}
-
 .blockWrapper {
   background-color: white;
   border-radius: 4px;
