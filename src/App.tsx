@@ -1,11 +1,11 @@
 import React from 'react'
-import Button from './components/Button/Button'
+import './global.css'
 import Numbers from './components/Numbers/Numbers'
 import Display from './components/Display/Display'
 import Operations from './components/Operations/Operations'
-import './global.css'
 import Switcher from './components/Switcher/Switcher'
 import DragField from './components/DragField/DragField'
+import Equals from './components/Equals/Equals'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Display value={0} className="blockWrapper" />
         <Operations className="blockWrapper" />
         <Numbers className="blockWrapper" />
-        <Button size="equals" className="blockWrapper" />
+        <Equals className="blockWrapper" />
       </div>
       <div className="rightPanel">
         <Switcher />

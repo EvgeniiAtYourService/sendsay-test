@@ -3,13 +3,7 @@ import classnames from 'classnames'
 import styles from './Button.module.css'
 import { ButtonProps } from './Button.props'
 
-function Button({
-  children,
-  size,
-  onClick,
-  className,
-  noRightMargin,
-}: ButtonProps) {
+function Button({ children, size, onClick, noRightMargin }: ButtonProps) {
   const classes = classnames(styles.common, {
     [styles.s]: size === 's',
     [styles.m]: size === 'm',
@@ -17,15 +11,6 @@ function Button({
     [styles.equals]: size === 'equals',
     [styles.noRightMargin]: noRightMargin,
   })
-  if (size === 'equals') {
-    return (
-      <div className={className}>
-        <button type="button" className={classes} onClick={onClick}>
-          =
-        </button>
-      </div>
-    )
-  }
   return (
     <button type="button" className={classes} onClick={onClick}>
       {children}

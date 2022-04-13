@@ -9,6 +9,10 @@
   justify-content: center;
 }
 
+.isDragged {
+  background-color: #f0f9ff;
+}
+
 .icon {
   margin-bottom: 12px;
 }
