@@ -32,10 +32,10 @@ body {
   padding: 38px 80px 54px 0;
 }
 
-.smth {
+.dragField {
+  background-color: red;
   width: 243px;
-  height: 547px;
-  background-color: grey;
+  height: 480px;
 }
 
 .blockWrapper {

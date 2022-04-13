@@ -1,0 +1,79 @@
+.switcherWrapper {
+  position: relative;
+}
+
+.switcher {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+.slider {
+  margin-bottom: 30px;
+  display: flex;
+  cursor: pointer;
+  color: var(--dark-grey);
+  width: 243px;
+  height: 38px;
+  border-radius: 6px;
+  background-color: var(--grey-bg);
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 15px;
+  padding: 1px;
+}
+
+.track {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  width: 108px;
+  height: 36px;
+  border-radius: 5px;
+  transition: 0.7s, width 0.1s;
+  background: white;
+  z-index: 1000;
+  border: 1px solid #e2e3e5;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trackMove {
+  left: calc(100% - 134px);
+  width: 133px;
+}
+
+.icon {
+  margin-right: 10.05px;
+  filter: invert(34%) sepia(9%) saturate(816%) hue-rotate(178deg)
+    brightness(89%) contrast(90%);
+}
+
+.iconActive {
+  filter: invert(39%) sepia(83%) saturate(5475%) hue-rotate(233deg)
+    brightness(107%) contrast(87%);
+}
+
+.sliderBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.runtimeBg {
+  width: 108px;
+}
+
+.constructorBg {
+  width: 133px;
+}
+
+.sliderBg p,
+.track p {
+  position: relative;
+  bottom: 1px;
+}

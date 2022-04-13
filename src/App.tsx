@@ -16,10 +16,8 @@ function App() {
         <Button size="equals" className="blockWrapper" />
       </div>
       <div className="rightPanel">
-        <div className="smth">
-          <p>123</p>
-          <Switcher />
-        </div>
+        <Switcher />
+        <div className="dragField">123</div>
       </div>
     </div>
   )
