@@ -5,6 +5,7 @@ const initialState: CalcState = {
   dragZone: [],
   draggedElement: null,
   isFieldHovered: false,
+  currentValue: 0,
 }
 
 export function CalcReducer(

@@ -1,9 +1,16 @@
 import React from 'react'
+import cn from 'classnames'
 import styles from './Equals.module.css'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
-function Equals(): JSX.Element {
+interface EqualsProps {
+  inZone: boolean
+}
+
+function Equals({ inZone }: EqualsProps): JSX.Element {
+  const { dragZone } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('equals')
@@ -12,7 +19,11 @@ function Equals(): JSX.Element {
     leaveElement()
   }
   return (
-    <div className={styles.equals}>
+    <div className={cn(styles.equals, {
+      readyItem: !inZone,
+      disabledItem: dragZone.includes('equals') && !inZone,
+    })}
+    >
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
         <Button size="xl">=</Button>
       </div>

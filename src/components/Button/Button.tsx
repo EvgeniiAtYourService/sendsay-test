@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes,
   DetailedHTMLProps,
-  ReactNode } from 'react'
+  ReactNode, } from 'react'
 import cn from 'classnames'
 import styles from './Button.module.css'
 

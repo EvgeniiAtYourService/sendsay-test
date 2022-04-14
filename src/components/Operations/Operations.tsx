@@ -1,9 +1,16 @@
 import React from 'react'
+import cn from 'classnames'
 import styles from './Operations.module.css'
 import Button from '../Button/Button'
 import { useActions } from '../../hooks/useActions'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
-function Operations(): JSX.Element {
+interface OperationsProps {
+  inZone: boolean
+}
+
+function Operations({ inZone }: OperationsProps): JSX.Element {
+  const { dragZone } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('operations')
@@ -12,7 +19,12 @@ function Operations(): JSX.Element {
     leaveElement()
   }
   return (
-    <div className={styles.operations}>
+    <div
+      className={cn(styles.operations, {
+        readyItem: !inZone,
+        disabledItem: dragZone.includes('operations') && !inZone,
+      })}
+    >
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
         <Button size="s">/</Button>
         <Button size="s">x</Button>

@@ -1,13 +1,21 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import styles from './Display.module.css'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
-type DisplayProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+interface DisplayProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  inZone: boolean
+}
 
-function Display({ value, onChange }: DisplayProps): JSX.Element {
+function Display({ inZone, onChange }: DisplayProps): JSX.Element {
+  const { currentValue, dragZone } = useTypedSelector(
+    (state) => state.calcState
+  )
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('display')
@@ -16,11 +24,16 @@ function Display({ value, onChange }: DisplayProps): JSX.Element {
     leaveElement()
   }
   return (
-    <div className={styles.displayWrapper}>
+    <div
+      className={cn(styles.displayWrapper, {
+        readyItem: !inZone,
+        disabledItem: dragZone.includes('display') && !inZone,
+      })}
+    >
       <input
-        type="text"
+        type="number"
         readOnly
-        value={value}
+        value={currentValue}
         onChange={onChange}
         className={styles.display}
         draggable

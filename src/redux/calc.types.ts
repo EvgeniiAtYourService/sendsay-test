@@ -10,6 +10,7 @@ export interface CalcState {
   dragZone: Array<draggedElement>
   draggedElement: draggedElement
   isFieldHovered: boolean
+  currentValue: number
 }
 
 export enum CalcActionTypes {

@@ -1,9 +1,16 @@
 import React from 'react'
+import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 import styles from './Numbers.module.css'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
-function Number(): JSX.Element {
+interface NumbersProps {
+  inZone: boolean
+}
+
+function Numbers({ inZone }: NumbersProps): JSX.Element {
+  const { dragZone } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('numbers')
@@ -12,7 +19,11 @@ function Number(): JSX.Element {
     leaveElement()
   }
   return (
-    <div className={styles.numbers}>
+    <div className={cn(styles.numbers, {
+      readyItem: !inZone,
+      disabledItem: dragZone.includes('numbers') && !inZone,
+    })}
+    >
       <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
         <Button size="m">7</Button>
         <Button size="m">8</Button>
@@ -38,4 +49,4 @@ function Number(): JSX.Element {
   )
 }
 
-export default Number
+export default Numbers
