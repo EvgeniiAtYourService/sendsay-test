@@ -11,19 +11,21 @@ import Equals from './components/Equals/Equals'
 import { useTypedSelector } from './hooks/useTypedSelector'
 
 function App(): JSX.Element {
-  const { isEditable } = useTypedSelector(
-    (state) => state.calcState,
-  )
+  const { isEditable, dragZone } = useTypedSelector((state) => state.calcState)
   return (
     <div className={styles.app}>
-      <div className={cn(styles.leftPanel, {
-        [styles.disabledPanel]: !isEditable,
-      })}
+      <div
+        className={cn(styles.leftPanel, {
+          [styles.disabledPanel]: !isEditable,
+        })}
       >
-        <Display inZone={false} />
-        <Operations inZone={false} />
-        <Numbers inZone={false} />
-        <Equals inZone={false} />
+        <Display inZone={false} isDraggable={!dragZone.includes('display')} />
+        <Operations
+          inZone={false}
+          isDraggable={!dragZone.includes('operations')}
+        />
+        <Numbers inZone={false} isDraggable={!dragZone.includes('numbers')} />
+        <Equals inZone={false} isDraggable={!dragZone.includes('equals')} />
       </div>
       <div className={styles.rightPanel}>
         <Switcher />

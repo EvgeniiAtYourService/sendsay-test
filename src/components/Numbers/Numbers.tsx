@@ -4,12 +4,9 @@ import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 import styles from './Numbers.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { ItemProps } from '../../interfaces/item-props.interface'
 
-interface NumbersProps {
-  inZone: boolean
-}
-
-function Numbers({ inZone }: NumbersProps): JSX.Element {
+function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const { dragZone } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
@@ -19,12 +16,17 @@ function Numbers({ inZone }: NumbersProps): JSX.Element {
     leaveElement()
   }
   return (
-    <div className={cn(styles.numbers, {
-      readyItem: !inZone,
-      disabledItem: dragZone.includes('numbers') && !inZone,
-    })}
+    <div
+      className={cn(styles.numbers, {
+        readyItem: !inZone,
+        disabledItem: dragZone.includes('numbers') && !inZone,
+      })}
     >
-      <div draggable onDragStart={dragStartHandler} onDragEnd={dragEndHandler}>
+      <div
+        draggable={isDraggable}
+        onDragStart={dragStartHandler}
+        onDragEnd={dragEndHandler}
+      >
         <Button size="m">7</Button>
         <Button size="m">8</Button>
         <Button size="m" noRightMargin>

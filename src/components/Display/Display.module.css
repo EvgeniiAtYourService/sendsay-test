@@ -1,25 +1,25 @@
 .displayWrapper {
-	display: inline-block;
+  display: inline-block;
 
-	margin-bottom: 12px;
-	padding: 4px;
+  margin-bottom: 12px;
+  padding: 4px;
 }
 
 .display {
-	width: 232px;
-	height: 52px;
-	padding: 4px 8px;
+  width: 232px;
+  height: 52px;
+  padding: 4px 8px;
 
-	text-align: right;
+  text-align: right;
 
-	color: #111827;
-	border: none;
-	border-radius: 6px;
-	outline: none;
-	background-color: var(--grey-bg);
+  color: #111827;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  background-color: var(--grey-bg);
 
-	font-family: var(--inter);
-	font-size: 36px;
-	font-weight: 800;
-	line-height: 44px;
+  font-family: var(--inter);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 44px;
 }

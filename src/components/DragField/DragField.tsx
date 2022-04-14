@@ -11,7 +11,7 @@ import Numbers from '../Numbers/Numbers'
 
 function DragField(): JSX.Element {
   const { isFieldHovered, dragZone } = useTypedSelector(
-    (state) => state.calcState,
+    (state) => state.calcState
   )
   const { hoverField } = useActions()
   const dragOverHandler = () => {
@@ -26,13 +26,13 @@ function DragField(): JSX.Element {
         {dragZone.map((item) => {
           switch (item) {
             case 'display':
-              return <Display inZone />
+              return <Display inZone isDraggable={false} />
             case 'operations':
-              return <Operations inZone />
+              return <Operations inZone isDraggable />
             case 'numbers':
-              return <Numbers inZone />
+              return <Numbers inZone isDraggable />
             case 'equals':
-              return <Equals inZone />
+              return <Equals inZone isDraggable />
             default:
               return null
           }

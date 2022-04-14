@@ -3,16 +3,12 @@ import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import styles from './Display.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { ItemProps } from '../../interfaces/item-props.interface'
 
-interface DisplayProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
-  inZone: boolean
-}
+type DisplayProps = ItemProps &
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-function Display({ inZone, onChange }: DisplayProps): JSX.Element {
+function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const { currentValue, dragZone } = useTypedSelector(
     (state) => state.calcState
   )
@@ -36,7 +32,7 @@ function Display({ inZone, onChange }: DisplayProps): JSX.Element {
         value={currentValue}
         onChange={onChange}
         className={styles.display}
-        draggable
+        draggable={isDraggable}
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}
       />
