@@ -1,10 +1,12 @@
 .numbers {
-  height: 224px;
-  width: 240px;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: var(--shadow);
-  display: inline-block;
-  padding: 4px;
-  margin-bottom: 12px;
+	display: inline-block;
+
+	width: 240px;
+	height: 224px;
+	margin-bottom: 12px;
+	padding: 4px;
+
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: var(--shadow);
 }

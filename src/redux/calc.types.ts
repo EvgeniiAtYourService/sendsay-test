@@ -7,7 +7,7 @@ export type draggedElement =
 
 export interface CalcState {
   isEditable: boolean
-  dragZone: Array<string>
+  dragZone: Array<draggedElement>
   draggedElement: draggedElement
   isFieldHovered: boolean
 }

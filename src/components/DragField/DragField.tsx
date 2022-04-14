@@ -1,10 +1,11 @@
 import React from 'react'
+import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import styles from './DragField.module.css'
 import imgIcon from './imgIcon.svg'
 
-function DragField() {
+function DragField(): JSX.Element {
   const { isFieldHovered } = useTypedSelector((state) => state.calcState)
   const { hoverField } = useActions()
   const dragOverHandler = () => {
@@ -15,11 +16,9 @@ function DragField() {
   }
   return (
     <div
-      className={
-        isFieldHovered
-          ? `${styles.dragField} ${styles.isDragged}`
-          : styles.dragField
-      }
+      className={cn(styles.dragField, {
+        [styles.isDragged]: isFieldHovered,
+      })}
       onDragOver={dragOverHandler}
       onDragLeave={dragLeaveHandler}
     >

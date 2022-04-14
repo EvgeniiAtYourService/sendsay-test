@@ -1,38 +1,44 @@
 .common {
-  height: 48px;
-  margin: 0 8px 8px 0;
-  background: #ffffff;
-  border: 1px solid #e2e3e5;
-  box-sizing: border-box;
-  border-radius: 6px;
-  font-family: var(--inter);
-  font-weight: 500;
-  color: black;
-  font-size: 14px;
-  line-height: 15px;
+	box-sizing: border-box;
+	height: 48px;
+	margin: 0 8px 8px 0;
+
+	color: black;
+	border: 1px solid #E2E3E5;
+	border-radius: 6px;
+	background: #FFF;
+
+	font-family: var(--inter);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 15px;
 }
 
 .common:active {
-  border: 2px solid var(--primary);
+	border: 2px solid var(--primary);
 }
 
 .s {
-  width: 52px;
+	width: 52px;
 }
+
 .m {
-  width: 72px;
+	width: 72px;
 }
+
 .l {
-  width: 152px;
+	width: 152px;
 }
+
 .xl {
-  width: 232px;
-  height: 64px;
-  color: white;
-  background-color: var(--primary);
-  margin: 0;
+	width: 232px;
+	height: 64px;
+	margin: 0;
+
+	color: white;
+	background-color: var(--primary);
 }
 
 .noRightMargin {
-  margin: 0 0 8px 0;
+	margin: 0 0 8px;
 }

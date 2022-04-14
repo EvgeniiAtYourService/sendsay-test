@@ -7,7 +7,7 @@ type DisplayProps = DetailedHTMLProps<
   HTMLInputElement
 >
 
-function Display({ value, onChange }: DisplayProps) {
+function Display({ value, onChange }: DisplayProps): JSX.Element {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('display')

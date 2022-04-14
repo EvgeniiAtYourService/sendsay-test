@@ -1,24 +1,29 @@
 .displayWrapper {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: var(--shadow);
-  display: inline-block;
-  padding: 4px;
-  margin-bottom: 12px;
+	display: inline-block;
+
+	margin-bottom: 12px;
+	padding: 4px;
+
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: var(--shadow);
 }
 
 .display {
-  background-color: var(--grey-bg);
-  border: none;
-  border-radius: 6px;
-  color: #111827;
-  text-align: right;
-  padding: 4px 8px;
-  outline: none;
-  font-family: var(--inter);
-  font-size: 36px;
-  font-weight: 800;
-  line-height: 44px;
-  height: 52px;
-  width: 232px;
+	width: 232px;
+	height: 52px;
+	padding: 4px 8px;
+
+	text-align: right;
+
+	color: #111827;
+	border: none;
+	border-radius: 6px;
+	outline: none;
+	background-color: var(--grey-bg);
+
+	font-family: var(--inter);
+	font-size: 36px;
+	font-weight: 800;
+	line-height: 44px;
 }

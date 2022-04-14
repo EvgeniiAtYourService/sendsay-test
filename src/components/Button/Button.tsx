@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes,
   DetailedHTMLProps,
   ReactNode } from 'react'
-import classnames from 'classnames'
+import cn from 'classnames'
 import styles from './Button.module.css'
 
 interface ButtonProps
@@ -14,8 +14,13 @@ interface ButtonProps
   noRightMargin?: boolean
 }
 
-function Button({ children, size, onClick, noRightMargin }: ButtonProps) {
-  const classes = classnames(styles.common, {
+function Button({
+  children,
+  size,
+  onClick,
+  noRightMargin,
+}: ButtonProps): JSX.Element {
+  const classes = cn(styles.common, {
     [styles.s]: size === 's',
     [styles.m]: size === 'm',
     [styles.l]: size === 'l',

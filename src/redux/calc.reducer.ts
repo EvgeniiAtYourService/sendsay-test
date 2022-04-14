@@ -7,10 +7,10 @@ const initialState: CalcState = {
   isFieldHovered: false,
 }
 
-export function CalcReducer(state = initialState, action: CalcAction) {
-  // const copyState = {
-  //   ...state,
-  // }
+export function CalcReducer(
+  state = initialState,
+  action: CalcAction,
+): CalcState {
   switch (action.type) {
     case CalcActionTypes.TOGGLE_SWITCHER:
       return {
@@ -23,10 +23,21 @@ export function CalcReducer(state = initialState, action: CalcAction) {
         draggedElement: action.payload,
       }
     case CalcActionTypes.LEAVE_ELEMENT:
+      // if (state.isFieldHovered && state.draggedElement === 'display') {
+      //   const copyState = {
+      //     ...state,
+      //   }
+      //   copyState.dragZone.push('display')
+      //   copyState.draggedElement = null
+      //   return copyState
+      // }
       return {
         ...state,
         draggedElement: null,
+        dragZone: [...state.dragZone, state.draggedElement],
       }
+    // copyState.dragZone.push('display')
+    // return state
     case CalcActionTypes.HOVER_FIELD:
       return {
         ...state,

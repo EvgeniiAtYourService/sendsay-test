@@ -3,7 +3,7 @@ import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 import styles from './Numbers.module.css'
 
-function Number() {
+function Number(): JSX.Element {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('numbers')

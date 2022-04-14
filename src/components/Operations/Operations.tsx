@@ -3,7 +3,7 @@ import styles from './Operations.module.css'
 import Button from '../Button/Button'
 import { useActions } from '../../hooks/useActions'
 
-function Operations() {
+function Operations(): JSX.Element {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('operations')

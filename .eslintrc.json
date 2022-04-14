@@ -54,5 +54,8 @@
     "import/resolver": {
       "typescript": {}
     }
+  },
+  "globals": {
+    "JSX": true
   }
 }

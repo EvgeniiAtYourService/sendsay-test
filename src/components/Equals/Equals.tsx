@@ -3,7 +3,7 @@ import styles from './Equals.module.css'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 
-function Equals() {
+function Equals(): JSX.Element {
   const { leaveElement, takeElement } = useActions()
   const dragStartHandler = () => {
     takeElement('equals')

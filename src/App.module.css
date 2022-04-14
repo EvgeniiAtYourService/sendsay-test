@@ -1,0 +1,20 @@
+.app {
+	display: flex;
+	justify-content: space-between;
+
+	width: 695px;
+	height: 640px;
+
+	background-color: #FFF;
+}
+
+.leftPanel {
+	display: flex;
+	flex-direction: column;
+
+	padding: 106px 0 86px 76px;
+}
+
+.rightPanel {
+	padding: 38px 80px 54px 0;
+}
