@@ -16,7 +16,7 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const { currentValue, dragZone, isFieldHovered, draggedElement } =
     useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget } = useActions()
+  const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
     takeElement('display')
   }
@@ -25,29 +25,28 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   }
   const dragOverHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(true)
-    }
+    setIsShown(true)
   }
 
   const dragLeaveHandler = () => {
-    if (inZone) {
-      setIsShown(false)
-    }
+    setIsShown(false)
   }
   const dropHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(false)
-      setDragTarget('displayFULL')
-    }
+    setIsShown(false)
+    setDragTarget('displayFULL')
+  }
+  const handleRemoveItem = () => {
+    removeItem('display')
   }
   return (
     <div
       className={cn(styles.displayWrapper, {
         readyItem: !inZone,
         disabledItem: dragZone.includes('display') && !inZone,
+
       })}
+      onDoubleClick={handleRemoveItem}
     >
       <div
         onDragOver={dragOverHandler}

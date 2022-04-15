@@ -11,7 +11,7 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone } = useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget } = useActions()
+  const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
     takeElement('numbers')
   }
@@ -20,41 +20,32 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const dragOverUpHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(true)
-      setLineUp(true)
-    }
+    setIsShown(true)
+    setLineUp(true)
   }
   const dragOverBotHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(true)
-      setLineUp(false)
-    }
+    setIsShown(true)
+    setLineUp(false)
   }
   const dragLeaveUpHandler = () => {
-    if (inZone) {
-      setIsShown(false)
-    }
+    setIsShown(false)
   }
   const dragLeaveBotHandler = () => {
-    if (inZone) {
-      setIsShown(false)
-    }
+    setIsShown(false)
   }
   const dropHandlerUp = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setDragTarget('numbersUP')
-      setIsShown(false)
-    }
+    setDragTarget('numbersUP')
+    setIsShown(false)
   }
   const dropHandlerBot = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setDragTarget('numbersBOT')
-      setIsShown(false)
-    }
+    setDragTarget('numbersBOT')
+    setIsShown(false)
+  }
+  const handleRemoveItem = () => {
+    removeItem('numbers')
   }
   return (
     <div
@@ -62,6 +53,7 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
         readyItem: !inZone,
         disabledItem: dragZone.includes('numbers') && !inZone,
       })}
+      onDoubleClick={handleRemoveItem}
     >
 
       <div

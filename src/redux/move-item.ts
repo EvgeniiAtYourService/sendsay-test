@@ -8,6 +8,7 @@ export const moveItem = (
   const copy = {
     ...state,
   }
+
   const elementIndex = copy.dragZone.indexOf(copy.draggedElement)
   const targetIndex = copy.dragZone.indexOf(dropTarget)
 
@@ -27,6 +28,7 @@ export const moveItem = (
     copy.dragTarget = null
     return copy
   }
+
   if (copy.dragZone.includes(copy.draggedElement)) {
     copy.dragZone.splice(elementIndex, 1)
     if (elementIndex > targetIndex) {

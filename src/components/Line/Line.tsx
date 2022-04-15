@@ -10,7 +10,7 @@ interface LineProps {
 
 function Line({ isShown, up = false }: LineProps): JSX.Element {
   const { draggedElement } = useTypedSelector((state) => state.calcState)
-  if (isShown && draggedElement !== null) {
+  if (isShown && draggedElement !== 'display') {
     return (
       <>
         <span className={cn(styles.rhombus, styles.leftRhombus, {

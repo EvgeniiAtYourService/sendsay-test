@@ -11,7 +11,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone } = useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget } = useActions()
+  const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
     takeElement('operations')
   }
@@ -20,41 +20,32 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const dragOverUpHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(true)
-      setLineUp(true)
-    }
+    setIsShown(true)
+    setLineUp(true)
   }
   const dragOverBotHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setIsShown(true)
-      setLineUp(false)
-    }
+    setIsShown(true)
+    setLineUp(false)
   }
   const dragLeaveUpHandler = () => {
-    if (inZone) {
-      setIsShown(false)
-    }
+    setIsShown(false)
   }
   const dragLeaveBotHandler = () => {
-    if (inZone) {
-      setIsShown(false)
-    }
+    setIsShown(false)
   }
   const dropHandlerUp = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setDragTarget('operationsUP')
-      setIsShown(false)
-    }
+    setDragTarget('operationsUP')
+    setIsShown(false)
   }
   const dropHandlerBot = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inZone) {
-      setDragTarget('operationsBOT')
-      setIsShown(false)
-    }
+    setDragTarget('operationsBOT')
+    setIsShown(false)
+  }
+  const handleRemoveItem = () => {
+    removeItem('operations')
   }
   return (
     <div
@@ -62,6 +53,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
         readyItem: !inZone,
         disabledItem: dragZone.includes('operations') && !inZone,
       })}
+      onDoubleClick={handleRemoveItem}
     >
       <div
         draggable={isDraggable}

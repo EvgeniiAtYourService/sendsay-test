@@ -72,6 +72,11 @@ export function CalcReducer(
           }
           return copy
       }
+    case CalcActionTypes.REMOVE_ITEM:
+      return {
+        ...state,
+        dragZone: copy.dragZone.filter((item) => item !== action.payload)
+      }
     default:
       return state
   }

@@ -30,3 +30,8 @@ export const setDragTarget = (payload: dragTarget): CalcAction => ({
 export const dropItem = (): CalcAction => ({
   type: CalcActionTypes.DROP_ITEM
 })
+
+export const removeItem = (payload: draggedElement): CalcAction => ({
+  type: CalcActionTypes.REMOVE_ITEM,
+  payload
+})
