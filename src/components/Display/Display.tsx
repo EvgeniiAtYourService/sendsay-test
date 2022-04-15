@@ -29,16 +29,17 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
       setIsShown(true)
     }
   }
+
+  const dragLeaveHandler = () => {
+    if (inZone) {
+      setIsShown(false)
+    }
+  }
   const dropHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     if (inZone) {
       setIsShown(false)
       setDragTarget('displayFULL')
-    }
-  }
-  const dragLeaveHandler = () => {
-    if (inZone) {
-      setIsShown(false)
     }
   }
   return (
@@ -50,6 +51,7 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
     >
       <div
         onDragOver={dragOverHandler}
+        onDragLeave={dragLeaveHandler}
         onDrop={dropHandler}
         className={cn('dropArea', {
           [styles.dropAreaFull]: inZone,
@@ -64,7 +66,6 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         draggable={isDraggable}
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}
-        onDragLeave={dragLeaveHandler}
         id="displayFULL"
       />
       {inZone ? (

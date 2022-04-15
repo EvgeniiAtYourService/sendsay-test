@@ -1,7 +1,7 @@
 .line {
   position: absolute;
   bottom: -7px;
-  left: 0.5px;
+  left: 0;
 
   background-color: var(--primary);
   height: 1.5px;
@@ -13,6 +13,7 @@
 .rhombus {
   padding: 2px;
   bottom: -8px;
+
   position: absolute;
   background-color: var(--primary);
   transform: rotate(45deg);
@@ -22,5 +23,15 @@
   left: 0px;
 }
 .rightRhombus {
-  right: 0px;
+  right: 0;
+}
+
+.lineUp {
+  top: -6px;
+  bottom: initial;
+}
+
+.rhombusUp {
+  top: -7px;
+  bottom: initial;
 }

@@ -26,6 +26,8 @@ body {
   --shadow: 0 2px 4px rgb(0 0 0 / 6%), 0 4px 6px rgb(0 0 0 / 10%);
 }
 
+/* common classes */
+
 .readyItem {
   border-radius: 4px;
   background-color: white;
@@ -43,3 +45,4 @@ body {
   left: 0;
 }
 
+/* common classes */

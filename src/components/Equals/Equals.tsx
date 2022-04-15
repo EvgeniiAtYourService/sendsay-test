@@ -1,12 +1,15 @@
-import React, { DragEvent } from 'react'
+import React, { DragEvent, useState } from 'react'
 import cn from 'classnames'
 import styles from './Equals.module.css'
 import { useActions } from '../../hooks/useActions'
 import Button from '../Button/Button'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
+import Line from '../Line/Line'
 
 function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
+  const [isShown, setIsShown] = useState<boolean>(false)
+  const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget } = useActions()
   const dragStartHandler = () => {
@@ -15,17 +18,36 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const dragEndHandler = () => {
     leaveElement()
   }
-  const dragOverHandler = (e: DragEvent<HTMLInputElement>) => {
+  const dragOverUpHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    // if (inZone) {
-    // setIsShown(true)
-    // }
+    if (inZone) {
+      setIsShown(true)
+      setLineUp(true)
+    }
+  }
+  const dragOverBotHandler = (e: DragEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if (inZone) {
+      setIsShown(true)
+      setLineUp(false)
+    }
+  }
+  const dragLeaveUpHandler = () => {
+    if (inZone) {
+      setIsShown(false)
+    }
+  }
+  const dragLeaveBotHandler = () => {
+    if (inZone) {
+      setIsShown(false)
+    }
   }
   const dropHandlerUp = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     if (inZone) {
       // setIsShown(false)
       setDragTarget('equalsUP')
+      setIsShown(false)
     }
   }
   const dropHandlerBot = (e: DragEvent<HTMLInputElement>) => {
@@ -33,6 +55,7 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
     if (inZone) {
       // setIsShown(false)
       setDragTarget('equalsBOT')
+      setIsShown(false)
     }
   }
   return (
@@ -48,20 +71,28 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
         onDragEnd={dragEndHandler}
       >
         <div
-          onDragOver={dragOverHandler}
+          onDragOver={dragOverUpHandler}
+          onDragLeave={dragLeaveUpHandler}
           onDrop={dropHandlerUp}
           className={cn('dropArea', {
             [styles.dropAreaUp]: inZone
           })}
         />
         <div
-          onDragOver={dragOverHandler}
+          onDragOver={dragOverBotHandler}
+          onDragLeave={dragLeaveBotHandler}
           onDrop={dropHandlerBot}
           className={cn('dropArea', {
             [styles.dropAreaBot]: inZone
           })}
         />
         <Button size="xl">=</Button>
+        {inZone ? (
+          <Line
+            isShown={isShown}
+            up={lineUp}
+          />
+        ) : undefined}
       </div>
     </div>
   )
