@@ -10,8 +10,10 @@
 .dropAreaUp {
   height: 35px;
   top: -6px;
+  /* background-color: rgba(155, 155, 155, 0.5); */
 }
 .dropAreaBot {
   height: 35px;
   top: 29px;
+  /* background-color: rgba(55, 55, 55, 0.5); */
 }

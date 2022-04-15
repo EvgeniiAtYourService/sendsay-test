@@ -1,4 +1,5 @@
 import { CalcAction, CalcActionTypes, CalcState } from './calc.types'
+import { moveItem } from './move-item'
 
 const initialState: CalcState = {
   isEditable: true,
@@ -45,24 +46,31 @@ export function CalcReducer(
     case CalcActionTypes.DROP_ITEM:
       switch (copy.dragTarget) {
         case 'displayFULL':
-          if (copy.dragZone.includes(copy.draggedElement)) {
-            const index = copy.dragZone.indexOf(copy.draggedElement)
-            copy.dragZone.splice(index, 1)
-            copy.dragZone.splice(1, 0, copy.draggedElement)
-          } else {
-            copy.dragZone.splice(1, 0, copy.draggedElement)
-          }
-          copy.dragTarget = null
-          return copy
+          return moveItem('display', null, copy)
+        case 'operationsUP':
+          return moveItem('operations', 'up', copy)
+        case 'operationsBOT':
+          return moveItem('operations', 'bot', copy)
+        case 'numbersUP':
+          return moveItem('numbers', 'up', copy)
+        case 'numbersBOT':
+          return moveItem('numbers', 'bot', copy)
+        case 'equalsUP':
+          return moveItem('equals', 'up', copy)
+        case 'equalsBOT':
+          return moveItem('equals', 'bot', copy)
         default:
-          return {
-            ...state,
-            dragZone:
-              state.draggedElement === 'display'
-                ? ['display', ...state.dragZone]
-                : [...state.dragZone, state.draggedElement],
-            draggedElement: null,
+          if (!copy.dragZone.includes(copy.draggedElement)) {
+            return {
+              ...state,
+              dragZone:
+                state.draggedElement === 'display'
+                  ? ['display', ...state.dragZone]
+                  : [...state.dragZone, state.draggedElement],
+              draggedElement: null,
+            }
           }
+          return copy
       }
     default:
       return state
