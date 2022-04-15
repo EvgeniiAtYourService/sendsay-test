@@ -5,12 +5,23 @@ export type draggedElement =
   | 'equals'
   | null
 
+export type dragTarget =
+  | 'displayFULL'
+  | 'operationsUP'
+  | 'operationsBOT'
+  | 'numbersUP'
+  | 'numbersBOT'
+  | 'equalsUP'
+  | 'equalsBOT'
+  | null
+
 export interface CalcState {
   isEditable: boolean
   dragZone: Array<draggedElement>
   draggedElement: draggedElement
   isFieldHovered: boolean
   currentValue: number
+  dragTarget: dragTarget
 }
 
 export enum CalcActionTypes {
@@ -18,6 +29,8 @@ export enum CalcActionTypes {
   LEAVE_ELEMENT = 'LEAVE_ELEMENT',
   TAKE_ELEMENT = 'TAKE_ELEMENT',
   HOVER_FIELD = 'HOVER_FIELD',
+  SET_DRAG_TARGET = 'SET_DRAG_TARGET',
+  DROP_ITEM = 'DROP_ITEM',
 }
 
 interface ToggleSwitcherAction {
@@ -39,8 +52,19 @@ interface hoverField {
   payload: boolean
 }
 
+interface setDragTarget {
+  type: CalcActionTypes.SET_DRAG_TARGET
+  payload: dragTarget
+}
+
+interface dropItem {
+  type: CalcActionTypes.DROP_ITEM
+}
+
 export type CalcAction =
   | ToggleSwitcherAction
   | leaveElement
   | takeElement
   | hoverField
+  | setDragTarget
+  | dropItem

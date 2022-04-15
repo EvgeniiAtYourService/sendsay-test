@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { DragEvent } from 'react'
 import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
@@ -10,19 +10,30 @@ import Equals from '../Equals/Equals'
 import Numbers from '../Numbers/Numbers'
 
 function DragField(): JSX.Element {
+  // const [isHovered, setIsHovered] = useState<boolean>(false)
   const { isFieldHovered, dragZone } = useTypedSelector(
     (state) => state.calcState
   )
-  const { hoverField } = useActions()
-  const dragOverHandler = () => {
+  const { hoverField, dropItem } = useActions()
+  const dragOverHandler = (e: DragEvent<HTMLInputElement>) => {
+    e.preventDefault()
     hoverField(true)
   }
   const dragLeaveHandler = () => {
     hoverField(false)
   }
+  const dropHandler = (e: DragEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    dropItem()
+  }
   if (dragZone.length !== 0) {
     return (
-      <div className={styles.dragContainer}>
+      <div
+        className={styles.dragContainer}
+        onDragOver={dragOverHandler}
+        onDragLeave={dragLeaveHandler}
+        onDrop={dropHandler}
+      >
         {dragZone.map((item) => {
           switch (item) {
             case 'display':
@@ -47,6 +58,7 @@ function DragField(): JSX.Element {
       })}
       onDragOver={dragOverHandler}
       onDragLeave={dragLeaveHandler}
+      onDrop={dropHandler}
     >
       <img src={imgIcon} alt="Icon" className={styles.icon} />
       <p className={styles.text}>Перетащите сюда</p>

@@ -1,7 +1,17 @@
 .operations {
-	display: inline-block;
+  display: inline-block;
 
-	height: 56px;
-	margin-bottom: 12px;
-	padding: 4px;
+  height: 56px;
+  margin-bottom: 12px;
+  padding: 4px;
+  position: relative;
+}
+
+.dropAreaUp {
+  height: 35px;
+  top: -6px;
+}
+.dropAreaBot {
+  height: 35px;
+  top: 29px;
 }

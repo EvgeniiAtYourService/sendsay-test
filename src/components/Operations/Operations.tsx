@@ -22,6 +22,14 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
         disabledItem: dragZone.includes('operations') && !inZone,
       })}
     >
+      <div className={cn('dropArea', {
+        [styles.dropAreaUp]: inZone
+      })}
+      />
+      <div className={cn('dropArea', {
+        [styles.dropAreaBot]: inZone
+      })}
+      />
       <div
         draggable={isDraggable}
         onDragStart={dragStartHandler}

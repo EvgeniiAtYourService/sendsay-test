@@ -36,3 +36,9 @@ body {
   opacity: 0.5;
   box-shadow: none;
 }
+
+.dropArea {
+  width: 243px;
+  position: absolute;
+  left: 0;
+}

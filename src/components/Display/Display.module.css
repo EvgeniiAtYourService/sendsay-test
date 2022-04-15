@@ -3,6 +3,7 @@
 
   margin-bottom: 12px;
   padding: 4px;
+  position: relative;
 }
 
 .display {
@@ -22,4 +23,9 @@
   font-size: 36px;
   font-weight: 800;
   line-height: 44px;
+}
+
+.dropAreaFull {
+  height: 66px;
+  top: 0;
 }

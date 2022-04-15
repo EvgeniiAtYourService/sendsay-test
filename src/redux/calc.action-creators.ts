@@ -1,4 +1,7 @@
-import { CalcAction, CalcActionTypes, draggedElement } from './calc.types'
+import { CalcAction,
+  CalcActionTypes,
+  draggedElement,
+  dragTarget, } from './calc.types'
 
 export const toggleSwitcher = (payload: boolean): CalcAction => ({
   type: CalcActionTypes.TOGGLE_SWITCHER,
@@ -17,4 +20,13 @@ export const takeElement = (payload: draggedElement): CalcAction => ({
 export const hoverField = (payload: boolean): CalcAction => ({
   type: CalcActionTypes.HOVER_FIELD,
   payload,
+})
+
+export const setDragTarget = (payload: dragTarget): CalcAction => ({
+  type: CalcActionTypes.SET_DRAG_TARGET,
+  payload,
+})
+
+export const dropItem = (): CalcAction => ({
+  type: CalcActionTypes.DROP_ITEM
 })

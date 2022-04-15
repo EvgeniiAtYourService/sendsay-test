@@ -1,6 +1,16 @@
 .equals {
-	display: inline-block;
+  display: inline-block;
 
-	margin-bottom: 12px;
-	padding: 4px;
+  margin-bottom: 12px;
+  padding: 4px;
+  position: relative;
+}
+
+.dropAreaUp {
+  height: 42px;
+  top: -6px;
+}
+.dropAreaBot {
+  height: 42px;
+  top: 36px;
 }

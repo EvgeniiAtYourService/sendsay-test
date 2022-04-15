@@ -15,6 +15,7 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const dragEndHandler = () => {
     leaveElement()
   }
+
   return (
     <div
       className={cn(styles.equals, {
@@ -22,6 +23,14 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
         disabledItem: dragZone.includes('equals') && !inZone,
       })}
     >
+      <div className={cn('dropArea', {
+        [styles.dropAreaUp]: inZone
+      })}
+      />
+      <div className={cn('dropArea', {
+        [styles.dropAreaBot]: inZone
+      })}
+      />
       <div
         draggable={isDraggable}
         onDragStart={dragStartHandler}

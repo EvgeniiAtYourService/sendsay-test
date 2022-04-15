@@ -1,0 +1,26 @@
+.line {
+  position: absolute;
+  bottom: -7px;
+  left: 0.5px;
+
+  background-color: var(--primary);
+  height: 1.5px;
+  border: none;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rhombus {
+  padding: 2px;
+  bottom: -8px;
+  position: absolute;
+  background-color: var(--primary);
+  transform: rotate(45deg);
+}
+
+.leftRhombus {
+  left: 0px;
+}
+.rightRhombus {
+  right: 0px;
+}

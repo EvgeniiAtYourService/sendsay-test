@@ -34,6 +34,7 @@
     "@typescript-eslint/no-shadow": ["error"],
     "max-len": ["warn", { "code": 80 }],
     "linebreak-style": 0,
+    "operator-linebreak": 0,
     // "comma-dangle": [2, "always-multiline"],
     "comma-dangle": 0,
     "object-curly-newline": [
