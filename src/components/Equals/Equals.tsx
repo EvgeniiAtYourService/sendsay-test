@@ -49,7 +49,7 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const handleClick = () => {
     if (inZone) {
-      alert('=')
+      console.log('=')
     }
   }
   return (

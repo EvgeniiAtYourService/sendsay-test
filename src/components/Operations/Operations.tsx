@@ -49,7 +49,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const handleClick = (operator: '/' | '*' | '-'| '+') => {
     if (inZone) {
-      alert(operator)
+      console.log(operator)
     }
   }
   return (
