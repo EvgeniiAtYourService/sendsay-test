@@ -3,6 +3,7 @@ import React, { ButtonHTMLAttributes,
   ReactNode, } from 'react'
 import cn from 'classnames'
 import styles from './Button.module.css'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 interface ButtonProps
   extends DetailedHTMLProps<
@@ -20,15 +21,22 @@ function Button({
   onClick,
   noRightMargin,
 }: ButtonProps): JSX.Element {
+  const { isEditable } =
+  useTypedSelector((state) => state.calcState)
   const classes = cn(styles.common, {
     [styles.s]: size === 's',
     [styles.m]: size === 'm',
     [styles.l]: size === 'l',
     [styles.xl]: size === 'xl',
     [styles.noRightMargin]: noRightMargin,
+    [styles.cursorPointer]: !isEditable,
   })
   return (
-    <button type="button" className={classes} onClick={onClick}>
+    <button
+      type="button"
+      className={classes}
+      onClick={onClick}
+    >
       {children}
     </button>
   )

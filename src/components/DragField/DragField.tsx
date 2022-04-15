@@ -10,7 +10,6 @@ import Equals from '../Equals/Equals'
 import Numbers from '../Numbers/Numbers'
 
 function DragField(): JSX.Element {
-  // const [isHovered, setIsHovered] = useState<boolean>(false)
   const { isFieldHovered, dragZone } = useTypedSelector(
     (state) => state.calcState
   )
@@ -25,6 +24,7 @@ function DragField(): JSX.Element {
   const dropHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     dropItem()
+    hoverField(false)
   }
   if (dragZone.length !== 0) {
     return (
@@ -37,13 +37,13 @@ function DragField(): JSX.Element {
         {dragZone.map((item) => {
           switch (item) {
             case 'display':
-              return <Display inZone isDraggable={false} />
+              return <Display key={item} inZone isDraggable={false} />
             case 'operations':
-              return <Operations inZone isDraggable />
+              return <Operations key={item} inZone isDraggable />
             case 'numbers':
-              return <Numbers inZone isDraggable />
+              return <Numbers key={item} inZone isDraggable />
             case 'equals':
-              return <Equals inZone isDraggable />
+              return <Equals key={item} inZone isDraggable />
             default:
               return null
           }

@@ -23,9 +23,14 @@
   font-size: 36px;
   font-weight: 800;
   line-height: 44px;
+  /* cursor: move; */
 }
 
 .dropAreaFull {
   height: 66px;
   top: 0;
+}
+
+.cursorDisabled {
+  cursor: not-allowed;
 }

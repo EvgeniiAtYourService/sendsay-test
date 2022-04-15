@@ -10,7 +10,7 @@ import Line from '../Line/Line'
 function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
-  const { dragZone } = useTypedSelector((state) => state.calcState)
+  const { dragZone, isEditable } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
     takeElement('equals')
@@ -47,36 +47,57 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const handleRemoveItem = () => {
     removeItem('equals')
   }
+  const handleClick = () => {
+    if (inZone) {
+      alert('=')
+    }
+  }
   return (
     <div
       className={cn(styles.equals, {
         readyItem: !inZone,
         disabledItem: dragZone.includes('equals') && !inZone,
       })}
-      onDoubleClick={handleRemoveItem}
+      onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
       <div
-        draggable={isDraggable}
+        draggable={isDraggable && isEditable}
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}
+        className={cn({
+          cursorMove: !inZone || (inZone && isEditable),
+          cursorDefault: inZone && !isEditable,
+        })}
+        style={
+          !inZone && dragZone.includes('equals')
+            ? {
+              cursor: 'default',
+            }
+            : undefined
+        }
       >
-        <div
-          onDragOver={dragOverUpHandler}
-          onDragLeave={dragLeaveUpHandler}
-          onDrop={dropHandlerUp}
-          className={cn('dropArea', {
-            [styles.dropAreaUp]: inZone
-          })}
-        />
-        <div
-          onDragOver={dragOverBotHandler}
-          onDragLeave={dragLeaveBotHandler}
-          onDrop={dropHandlerBot}
-          className={cn('dropArea', {
-            [styles.dropAreaBot]: inZone
-          })}
-        />
-        <Button size="xl">=</Button>
+        { isEditable && (
+          <>
+            <div
+              onDragOver={dragOverUpHandler}
+              onDragLeave={dragLeaveUpHandler}
+              onDrop={dropHandlerUp}
+              className={cn('dropArea', {
+                [styles.dropAreaUp]: inZone
+              })}
+            />
+            <div
+              onDragOver={dragOverBotHandler}
+              onDragLeave={dragLeaveBotHandler}
+              onDrop={dropHandlerBot}
+              className={cn('dropArea', {
+                [styles.dropAreaBot]: inZone
+              })}
+            />
+          </>
+        ) }
+
+        <Button size="xl" onClick={handleClick}>=</Button>
         {inZone ? (
           <Line
             isShown={isShown}

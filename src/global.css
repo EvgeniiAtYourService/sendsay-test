@@ -37,6 +37,7 @@ body {
 .disabledItem {
   opacity: 0.5;
   box-shadow: none;
+  cursor: default;
 }
 
 .dropArea {
@@ -44,5 +45,17 @@ body {
   position: absolute;
   left: 0;
 }
+
+/* | cursors */
+
+.cursorMove {
+  cursor: move;
+}
+
+.cursorDefault {
+  cursor: default;
+}
+
+/* | -- cursors */
 
 /* common classes */

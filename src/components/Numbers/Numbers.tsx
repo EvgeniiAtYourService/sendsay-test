@@ -10,7 +10,7 @@ import Line from '../Line/Line'
 function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
-  const { dragZone } = useTypedSelector((state) => state.calcState)
+  const { dragZone, isEditable } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
     takeElement('numbers')
@@ -47,61 +47,76 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const handleRemoveItem = () => {
     removeItem('numbers')
   }
+  const handleClick = (value: number | ',') => {
+    if (inZone) {
+      console.log(value)
+    }
+  }
   return (
     <div
       className={cn(styles.numbers, {
         readyItem: !inZone,
         disabledItem: dragZone.includes('numbers') && !inZone,
       })}
-      onDoubleClick={handleRemoveItem}
+      onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
-
       <div
-        draggable={isDraggable}
+        draggable={isDraggable && isEditable}
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}
+        className={cn({
+          cursorMove: !inZone || (inZone && isEditable),
+          cursorDefault: inZone && !isEditable,
+        })}
+        style={
+          !inZone && dragZone.includes('numbers')
+            ? {
+              cursor: 'default',
+            }
+            : undefined
+        }
       >
-        <div
-          onDragOver={dragOverUpHandler}
-          onDragLeave={dragLeaveUpHandler}
-          onDrop={dropHandlerUp}
-          className={cn('dropArea', {
-            [styles.dropAreaUp]: inZone
-          })}
-        />
-        <div
-          onDragOver={dragOverBotHandler}
-          onDragLeave={dragLeaveBotHandler}
-          onDrop={dropHandlerBot}
-          className={cn('dropArea', {
-            [styles.dropAreaBot]: inZone
-          })}
-        />
-        <Button size="m">7</Button>
-        <Button size="m">8</Button>
-        <Button size="m" noRightMargin>
+        { isEditable && (
+          <>
+            <div
+              onDragOver={dragOverUpHandler}
+              onDragLeave={dragLeaveUpHandler}
+              onDrop={dropHandlerUp}
+              className={cn('dropArea', {
+                [styles.dropAreaUp]: inZone,
+              })}
+            />
+            <div
+              onDragOver={dragOverBotHandler}
+              onDragLeave={dragLeaveBotHandler}
+              onDrop={dropHandlerBot}
+              className={cn('dropArea', {
+                [styles.dropAreaBot]: inZone,
+              })}
+            />
+          </>
+        ) }
+
+        <Button size="m" value="1" onClick={() => handleClick(7)}>7</Button>
+        <Button size="m" onClick={() => handleClick(8)}>8</Button>
+        <Button size="m" onClick={() => handleClick(9)} noRightMargin>
           9
         </Button>
-        <Button size="m">4</Button>
-        <Button size="m">5</Button>
-        <Button size="m" noRightMargin>
+        <Button size="m" onClick={() => handleClick(4)}>4</Button>
+        <Button size="m" onClick={() => handleClick(5)}>5</Button>
+        <Button size="m" onClick={() => handleClick(6)} noRightMargin>
           6
         </Button>
-        <Button size="m">1</Button>
-        <Button size="m">2</Button>
-        <Button size="m" noRightMargin>
+        <Button size="m" onClick={() => handleClick(1)}>1</Button>
+        <Button size="m" onClick={() => handleClick(2)}>2</Button>
+        <Button size="m" onClick={() => handleClick(3)} noRightMargin>
           3
         </Button>
-        <Button size="l">0</Button>
-        <Button size="m" noRightMargin>
+        <Button size="l" onClick={() => handleClick(0)}>0</Button>
+        <Button size="m" onClick={() => handleClick(',')} noRightMargin>
           ,
         </Button>
-        {inZone ? (
-          <Line
-            isShown={isShown}
-            up={lineUp}
-          />
-        ) : undefined}
+        {inZone ? <Line isShown={isShown} up={lineUp} /> : undefined}
       </div>
     </div>
   )

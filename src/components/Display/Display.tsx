@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps,
+import React, { CSSProperties, DetailedHTMLProps,
   DragEvent,
   InputHTMLAttributes,
   useState, } from 'react'
@@ -14,7 +14,7 @@ type DisplayProps = ItemProps &
 
 function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
-  const { currentValue, dragZone, isFieldHovered, draggedElement } =
+  const { currentValue, dragZone, isFieldHovered, draggedElement, isEditable } =
     useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
   const dragStartHandler = () => {
@@ -39,6 +39,19 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const handleRemoveItem = () => {
     removeItem('display')
   }
+  const defineCursor = (): CSSProperties | undefined => {
+    if (!inZone && dragZone.includes('display')) {
+      return {
+        cursor: 'default'
+      }
+    }
+    if (!inZone && !dragZone.includes('display')) {
+      return {
+        cursor: 'move'
+      }
+    }
+    return undefined
+  }
   return (
     <div
       className={cn(styles.displayWrapper, {
@@ -46,7 +59,7 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         disabledItem: dragZone.includes('display') && !inZone,
 
       })}
-      onDoubleClick={handleRemoveItem}
+      onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
       <div
         onDragOver={dragOverHandler}
@@ -54,6 +67,9 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         onDrop={dropHandler}
         className={cn('dropArea', {
           [styles.dropAreaFull]: inZone,
+          cursorMove: !inZone,
+          [styles.cursorDisabled]: inZone && isEditable,
+          cursorDefault: inZone && !isEditable,
         })}
       />
       <input
@@ -66,6 +82,7 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}
         id="displayFULL"
+        style={defineCursor()}
       />
       {inZone ? (
         <Line
