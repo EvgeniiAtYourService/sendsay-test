@@ -7,6 +7,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
 import Line from '../common/Line/Line'
 import DropAreas from '../common/DropAreas/DropAreas'
+import DraggableItem from '../common/DraggableItem/DraggableItem'
 
 function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
@@ -17,12 +18,6 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
     useActions()
   const isElementLast = dragZone.indexOf('numbers') === dragZone.length - 1
   const notMaxLength = dragZone.length !== 4
-  const dragStartHandler = () => {
-    takeElement('numbers')
-  }
-  const dragEndHandler = () => {
-    leaveElement()
-  }
   const handleRemoveItem = () => {
     removeItem('numbers')
   }
@@ -41,21 +36,14 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
       })}
       onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
-      <div
-        draggable={isDraggable && isEditable}
-        onDragStart={dragStartHandler}
-        onDragEnd={dragEndHandler}
-        className={cn({
-          cursorMove: !inZone || (inZone && isEditable),
-          cursorDefault: inZone && !isEditable,
-        })}
-        style={
-          !inZone && dragZone.includes('numbers')
-            ? {
-              cursor: 'default',
-            }
-            : undefined
-        }
+      <DraggableItem
+        item="numbers"
+        takeElement={takeElement}
+        leaveElement={leaveElement}
+        isDraggable={isDraggable}
+        isEditable={isEditable}
+        inZone={inZone}
+        dragZone={dragZone}
       >
         <DropAreas
           item="numbers"
@@ -149,18 +137,17 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
         >
           ,
         </Button>
-        {inZone ? <Line isShown={isShown} up={lineUp} /> : undefined}
-        {inZone ? (
-          <Line
-            isShown={
+        <Line isShown={isShown} up={lineUp} inZone={inZone} />
+        <Line
+          isShown={
             isFieldHovered &&
             isElementLast &&
             notMaxLength
             && !itemHovered
           }
-          />
-        ) : undefined}
-      </div>
+          inZone={inZone}
+        />
+      </DraggableItem>
     </div>
   )
 }

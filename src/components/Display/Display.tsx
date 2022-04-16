@@ -15,14 +15,8 @@ type DisplayProps = ItemProps &
 
 function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
-  const {
-    currentValue,
-    dragZone,
-    isFieldHovered,
-    draggedElement,
-    isEditable,
-    itemHovered,
-  } = useTypedSelector((state) => state.calcState)
+  const { currentValue, dragZone, isFieldHovered, draggedElement, isEditable } =
+    useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
     useActions()
   const dragStartHandler = () => {
@@ -78,28 +72,14 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         id="displayFULL"
         style={defineCursor()}
       />
-      {inZone ? (
-        <Line
-          isShown={
-            isShown ||
-            (isFieldHovered &&
-              dragZone.length === 1 &&
-              dragZone[0] === 'display')
-          }
-        />
-      ) : undefined}
-      {/* === */}
-      {inZone ? (
-        <Line
-          isShown={
-            isFieldHovered &&
-            dragZone.length === 1 &&
-            dragZone[0] === 'display' &&
-            !itemHovered
-          }
-        />
-      ) : undefined}
-      {/* === */}
+
+      <Line
+        isShown={
+          isShown ||
+          (isFieldHovered && dragZone.length === 1 && dragZone[0] === 'display')
+        }
+        inZone={inZone}
+      />
     </div>
   )
 }

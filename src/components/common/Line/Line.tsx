@@ -6,11 +6,12 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector'
 interface LineProps {
   isShown: boolean
   up?: boolean
+  inZone: boolean
 }
 
-function Line({ isShown, up = false }: LineProps): JSX.Element {
+function Line({ isShown, up = false, inZone }: LineProps): JSX.Element {
   const { draggedElement } = useTypedSelector((state) => state.calcState)
-  if (isShown && draggedElement !== 'display') {
+  if (isShown && draggedElement !== 'display' && inZone) {
     return (
       <>
         <span className={cn(styles.rhombus, styles.leftRhombus, {

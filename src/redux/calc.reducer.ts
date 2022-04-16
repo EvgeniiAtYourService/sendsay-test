@@ -23,6 +23,7 @@ export function CalcReducer(
       return {
         ...state,
         isEditable: action.payload,
+        currentValue: 0,
       }
     case CalcActionTypes.TAKE_ELEMENT:
       return {

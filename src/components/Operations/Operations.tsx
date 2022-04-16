@@ -7,6 +7,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
 import Line from '../common/Line/Line'
 import DropAreas from '../common/DropAreas/DropAreas'
+import DraggableItem from '../common/DraggableItem/DraggableItem'
 
 function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
@@ -17,12 +18,6 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
     useActions()
   const isElementLast = dragZone.indexOf('operations') === dragZone.length - 1
   const notMaxLength = dragZone.length !== 4
-  const dragStartHandler = () => {
-    takeElement('operations')
-  }
-  const dragEndHandler = () => {
-    leaveElement()
-  }
 
   const handleRemoveItem = () => {
     removeItem('operations')
@@ -42,21 +37,14 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
       })}
       onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
-      <div
-        draggable={isDraggable && isEditable}
-        onDragStart={dragStartHandler}
-        onDragEnd={dragEndHandler}
-        className={cn({
-          cursorMove: !inZone || (inZone && isEditable),
-          cursorDefault: inZone && !isEditable,
-        })}
-        style={
-          !inZone && dragZone.includes('operations')
-            ? {
-              cursor: 'default',
-            }
-            : undefined
-        }
+      <DraggableItem
+        item="operations"
+        takeElement={takeElement}
+        leaveElement={leaveElement}
+        isDraggable={isDraggable}
+        isEditable={isEditable}
+        inZone={inZone}
+        dragZone={dragZone}
       >
         <DropAreas
           item="operations"
@@ -97,18 +85,18 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
         >
           +
         </Button>
-        {inZone ? <Line isShown={isShown} up={lineUp} /> : undefined}
-        {inZone ? (
-          <Line
-            isShown={
+        <Line isShown={isShown} up={lineUp} inZone={inZone} />
+        <Line
+          isShown={
             isFieldHovered &&
             isElementLast &&
             notMaxLength
             && !itemHovered
           }
-          />
-        ) : undefined}
-      </div>
+          inZone={inZone}
+        />
+
+      </DraggableItem>
     </div>
   )
 }
