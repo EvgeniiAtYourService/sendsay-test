@@ -35,3 +35,8 @@ export const removeItem = (payload: draggedElement): CalcAction => ({
   type: CalcActionTypes.REMOVE_ITEM,
   payload
 })
+
+export const hoverItem = (payload: boolean): CalcAction => ({
+  type: CalcActionTypes.HOVER_ITEM,
+  payload
+})

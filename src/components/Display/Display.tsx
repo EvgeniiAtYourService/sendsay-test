@@ -1,4 +1,5 @@
-import React, { CSSProperties, DetailedHTMLProps,
+import React, { CSSProperties,
+  DetailedHTMLProps,
   DragEvent,
   InputHTMLAttributes,
   useState, } from 'react'
@@ -7,16 +8,23 @@ import { useActions } from '../../hooks/useActions'
 import styles from './Display.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
-import Line from '../Line/Line'
+import Line from '../common/Line/Line'
 
 type DisplayProps = ItemProps &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
-  const { currentValue, dragZone, isFieldHovered, draggedElement, isEditable } =
-    useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
+  const {
+    currentValue,
+    dragZone,
+    isFieldHovered,
+    draggedElement,
+    isEditable,
+    itemHovered,
+  } = useTypedSelector((state) => state.calcState)
+  const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
+    useActions()
   const dragStartHandler = () => {
     takeElement('display')
   }
@@ -26,15 +34,18 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const dragOverHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     setIsShown(true)
+    hoverItem(true)
   }
 
   const dragLeaveHandler = () => {
     setIsShown(false)
+    hoverItem(false)
   }
   const dropHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
-    setIsShown(false)
     setDragTarget('displayFULL')
+    setIsShown(false)
+    hoverItem(false)
   }
   const handleRemoveItem = () => {
     removeItem('display')
@@ -42,12 +53,12 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const defineCursor = (): CSSProperties | undefined => {
     if (!inZone && dragZone.includes('display')) {
       return {
-        cursor: 'default'
+        cursor: 'default',
       }
     }
     if (!inZone && !dragZone.includes('display')) {
       return {
-        cursor: 'move'
+        cursor: 'move',
       }
     }
     return undefined
@@ -56,8 +67,9 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
     <div
       className={cn(styles.displayWrapper, {
         readyItem: !inZone,
-        disabledItem: dragZone.includes('display') && !inZone,
-
+        disabledItem:
+          (dragZone.includes('display') && !inZone) ||
+          draggedElement === 'display',
       })}
       onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
@@ -88,13 +100,24 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         <Line
           isShown={
             isShown ||
-            (draggedElement !== null &&
-              isFieldHovered &&
+            (isFieldHovered &&
               dragZone.length === 1 &&
               dragZone[0] === 'display')
           }
         />
       ) : undefined}
+      {/* === */}
+      {inZone ? (
+        <Line
+          isShown={
+            isFieldHovered &&
+            dragZone.length === 1 &&
+            dragZone[0] === 'display' &&
+            !itemHovered
+          }
+        />
+      ) : undefined}
+      {/* === */}
     </div>
   )
 }

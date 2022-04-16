@@ -22,6 +22,7 @@ export interface CalcState {
   isFieldHovered: boolean
   currentValue: number
   dragTarget: dragTarget
+  itemHovered: boolean
 }
 
 export enum CalcActionTypes {
@@ -32,6 +33,7 @@ export enum CalcActionTypes {
   SET_DRAG_TARGET = 'SET_DRAG_TARGET',
   DROP_ITEM = 'DROP_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
+  HOVER_ITEM = 'HOVER_ITEM',
 }
 
 interface ToggleSwitcherAction {
@@ -67,6 +69,11 @@ interface removeItem {
   payload: draggedElement
 }
 
+interface hoverItem {
+  type: CalcActionTypes.HOVER_ITEM
+  payload: boolean
+}
+
 export type CalcAction =
   | ToggleSwitcherAction
   | leaveElement
@@ -75,3 +82,4 @@ export type CalcAction =
   | setDragTarget
   | dropItem
   | removeItem
+  | hoverItem

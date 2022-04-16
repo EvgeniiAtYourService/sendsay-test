@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './Line.module.css'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 
 interface LineProps {
   isShown: boolean

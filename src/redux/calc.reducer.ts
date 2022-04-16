@@ -7,7 +7,8 @@ const initialState: CalcState = {
   draggedElement: null,
   isFieldHovered: false,
   currentValue: 0,
-  dragTarget: null
+  dragTarget: null,
+  itemHovered: false
 }
 
 export function CalcReducer(
@@ -70,12 +71,19 @@ export function CalcReducer(
               draggedElement: null,
             }
           }
+          copy.dragZone.splice(copy.dragZone.indexOf(copy.draggedElement), 1)
+          copy.dragZone.push(copy.draggedElement)
           return copy
       }
     case CalcActionTypes.REMOVE_ITEM:
       return {
         ...state,
         dragZone: copy.dragZone.filter((item) => item !== action.payload)
+      }
+    case CalcActionTypes.HOVER_ITEM:
+      return {
+        ...state,
+        itemHovered: action.payload,
       }
     default:
       return state

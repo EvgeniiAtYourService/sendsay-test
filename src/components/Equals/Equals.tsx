@@ -2,16 +2,20 @@ import React, { DragEvent, useState } from 'react'
 import cn from 'classnames'
 import styles from './Equals.module.css'
 import { useActions } from '../../hooks/useActions'
-import Button from '../Button/Button'
+import Button from '../common/Button/Button'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
-import Line from '../Line/Line'
+import Line from '../common/Line/Line'
 
 function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
-  const { dragZone, isEditable } = useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget, removeItem } = useActions()
+  const { dragZone, isEditable, draggedElement, isFieldHovered, itemHovered } =
+    useTypedSelector((state) => state.calcState)
+  const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
+    useActions()
+  const isElementLast = dragZone.indexOf('equals') === dragZone.length - 1
+  const notMaxLength = dragZone.length !== 4
   const dragStartHandler = () => {
     takeElement('equals')
   }
@@ -22,27 +26,33 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
     e.preventDefault()
     setIsShown(true)
     setLineUp(true)
+    hoverItem(true)
   }
   const dragOverBotHandler = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     setIsShown(true)
     setLineUp(false)
+    hoverItem(true)
   }
   const dragLeaveUpHandler = () => {
     setIsShown(false)
+    hoverItem(false)
   }
   const dragLeaveBotHandler = () => {
     setIsShown(false)
+    hoverItem(false)
   }
   const dropHandlerUp = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     setDragTarget('equalsUP')
     setIsShown(false)
+    hoverItem(false)
   }
   const dropHandlerBot = (e: DragEvent<HTMLInputElement>) => {
     e.preventDefault()
     setDragTarget('equalsBOT')
     setIsShown(false)
+    hoverItem(false)
   }
   const handleRemoveItem = () => {
     removeItem('equals')
@@ -56,7 +66,9 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
     <div
       className={cn(styles.equals, {
         readyItem: !inZone,
-        disabledItem: dragZone.includes('equals') && !inZone,
+        disabledItem:
+          (dragZone.includes('equals') && !inZone) ||
+          draggedElement === 'equals',
       })}
       onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
@@ -76,14 +88,14 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
             : undefined
         }
       >
-        { isEditable && (
+        {isEditable && (
           <>
             <div
               onDragOver={dragOverUpHandler}
               onDragLeave={dragLeaveUpHandler}
               onDrop={dropHandlerUp}
               className={cn('dropArea', {
-                [styles.dropAreaUp]: inZone
+                [styles.dropAreaUp]: inZone,
               })}
             />
             <div
@@ -91,17 +103,29 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
               onDragLeave={dragLeaveBotHandler}
               onDrop={dropHandlerBot}
               className={cn('dropArea', {
-                [styles.dropAreaBot]: inZone
+                [styles.dropAreaBot]: inZone,
               })}
             />
           </>
-        ) }
+        )}
 
-        <Button size="xl" onClick={handleClick}>=</Button>
+        <Button
+          size="xl"
+          onClick={handleClick}
+          pointer={!inZone && dragZone.includes('equals')}
+        >
+          =
+        </Button>
+        {inZone ? <Line isShown={isShown} up={lineUp} /> : undefined}
+
         {inZone ? (
           <Line
-            isShown={isShown}
-            up={lineUp}
+            isShown={
+              isFieldHovered &&
+              isElementLast &&
+              notMaxLength &&
+              !itemHovered
+            }
           />
         ) : undefined}
       </div>

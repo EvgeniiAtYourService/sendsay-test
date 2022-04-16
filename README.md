@@ -1,1 +1,1 @@
-[a link](https://sendsay-test.web.app/)
+[Deploy](https://sendsay-test.web.app/)
