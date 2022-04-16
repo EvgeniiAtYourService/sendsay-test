@@ -10,6 +10,7 @@ import DropAreas from '../common/DropAreas/DropAreas'
 import DraggableItem from '../common/DraggableItem/DraggableItem'
 
 function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
+  const buttonValues = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, ',']
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone, isEditable, draggedElement, isFieldHovered, itemHovered } =
@@ -21,7 +22,7 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const handleRemoveItem = () => {
     removeItem('numbers')
   }
-  const handleClick = (value: number | ',') => {
+  const handleClick = (value: number | string) => {
     if (inZone) {
       console.log(value)
     }
@@ -55,95 +56,22 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
           setDragTarget={setDragTarget}
         />
 
-        <Button
-          size="m"
-          value="1"
-          onClick={() => handleClick(7)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          7
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(8)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          8
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(9)}
-          noRightMargin
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          9
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(4)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          4
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(5)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          5
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(6)}
-          noRightMargin
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          6
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(1)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          1
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(2)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          2
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(3)}
-          noRightMargin
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          3
-        </Button>
-        <Button
-          size="l"
-          onClick={() => handleClick(0)}
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          0
-        </Button>
-        <Button
-          size="m"
-          onClick={() => handleClick(',')}
-          noRightMargin
-          pointer={!inZone && dragZone.includes('numbers')}
-        >
-          ,
-        </Button>
+        {buttonValues.map((value, index) => (
+          <Button
+            key={value}
+            size={!value ? 'l' : 'm'}
+            onClick={() => handleClick(value)}
+            pointer={!inZone && dragZone.includes('numbers')}
+            noRightMargin={value === ',' || (index + 1) % 3 === 0}
+          >
+            {value}
+          </Button>
+        ))}
+
         <Line isShown={isShown} up={lineUp} inZone={inZone} />
         <Line
           isShown={
-            isFieldHovered &&
-            isElementLast &&
-            notMaxLength
-            && !itemHovered
+            isFieldHovered && isElementLast && notMaxLength && !itemHovered
           }
           inZone={inZone}
         />

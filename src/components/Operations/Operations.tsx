@@ -10,6 +10,7 @@ import DropAreas from '../common/DropAreas/DropAreas'
 import DraggableItem from '../common/DraggableItem/DraggableItem'
 
 function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
+  const buttonValues = ['/', '*', '-', '+']
   const [isShown, setIsShown] = useState<boolean>(false)
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone, isEditable, draggedElement, isFieldHovered, itemHovered } =
@@ -22,7 +23,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   const handleRemoveItem = () => {
     removeItem('operations')
   }
-  const handleClick = (operator: '/' | '*' | '-' | '+') => {
+  const handleClick = (operator: string) => {
     if (inZone) {
       console.log(operator)
     }
@@ -56,46 +57,24 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
           setDragTarget={setDragTarget}
         />
 
-        <Button
-          size="s"
-          onClick={() => handleClick('/')}
-          pointer={!inZone && dragZone.includes('operations')}
-        >
-          /
-        </Button>
-        <Button
-          size="s"
-          onClick={() => handleClick('*')}
-          pointer={!inZone && dragZone.includes('operations')}
-        >
-          x
-        </Button>
-        <Button
-          size="s"
-          onClick={() => handleClick('-')}
-          pointer={!inZone && dragZone.includes('operations')}
-        >
-          -
-        </Button>
-        <Button
-          size="s"
-          onClick={() => handleClick('+')}
-          noRightMargin
-          pointer={!inZone && dragZone.includes('operations')}
-        >
-          +
-        </Button>
+        {buttonValues.map((value) => (
+          <Button
+            size="s"
+            onClick={() => handleClick(value)}
+            pointer={!inZone && dragZone.includes('operations')}
+            noRightMargin={value === '+'}
+          >
+            {value}
+          </Button>
+        ))}
+
         <Line isShown={isShown} up={lineUp} inZone={inZone} />
         <Line
           isShown={
-            isFieldHovered &&
-            isElementLast &&
-            notMaxLength
-            && !itemHovered
+            isFieldHovered && isElementLast && notMaxLength && !itemHovered
           }
           inZone={inZone}
         />
-
       </DraggableItem>
     </div>
   )
