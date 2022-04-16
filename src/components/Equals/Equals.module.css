@@ -5,12 +5,3 @@
   padding: 4px;
   position: relative;
 }
-
-.dropAreaUp {
-  height: 42px;
-  top: -6px;
-}
-.dropAreaBot {
-  height: 42px;
-  top: 36px;
-}

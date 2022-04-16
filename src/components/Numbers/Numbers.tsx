@@ -1,4 +1,4 @@
-import React, { DragEvent, useState } from 'react'
+import React, { useState } from 'react'
 import cn from 'classnames'
 import { useActions } from '../../hooks/useActions'
 import Button from '../common/Button/Button'
@@ -6,6 +6,7 @@ import styles from './Numbers.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
 import Line from '../common/Line/Line'
+import DropAreas from '../common/DropAreas/DropAreas'
 
 function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
@@ -21,38 +22,6 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const dragEndHandler = () => {
     leaveElement()
-  }
-  const dragOverUpHandler = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setIsShown(true)
-    setLineUp(true)
-    hoverItem(true)
-  }
-  const dragOverBotHandler = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setIsShown(true)
-    setLineUp(false)
-    hoverItem(true)
-  }
-  const dragLeaveUpHandler = () => {
-    setIsShown(false)
-    hoverItem(false)
-  }
-  const dragLeaveBotHandler = () => {
-    setIsShown(false)
-    hoverItem(false)
-  }
-  const dropHandlerUp = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setDragTarget('numbersUP')
-    setIsShown(false)
-    hoverItem(false)
-  }
-  const dropHandlerBot = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setDragTarget('numbersBOT')
-    setIsShown(false)
-    hoverItem(false)
   }
   const handleRemoveItem = () => {
     removeItem('numbers')
@@ -88,26 +57,15 @@ function Numbers({ inZone, isDraggable }: ItemProps): JSX.Element {
             : undefined
         }
       >
-        {isEditable && (
-          <>
-            <div
-              onDragOver={dragOverUpHandler}
-              onDragLeave={dragLeaveUpHandler}
-              onDrop={dropHandlerUp}
-              className={cn('dropArea', {
-                [styles.dropAreaUp]: inZone,
-              })}
-            />
-            <div
-              onDragOver={dragOverBotHandler}
-              onDragLeave={dragLeaveBotHandler}
-              onDrop={dropHandlerBot}
-              className={cn('dropArea', {
-                [styles.dropAreaBot]: inZone,
-              })}
-            />
-          </>
-        )}
+        <DropAreas
+          item="numbers"
+          isEditable={isEditable}
+          inZone={inZone}
+          setIsShown={setIsShown}
+          setLineUp={setLineUp}
+          hoverItem={hoverItem}
+          setDragTarget={setDragTarget}
+        />
 
         <Button
           size="m"

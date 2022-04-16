@@ -1,6 +1,5 @@
 import React, { CSSProperties,
   DetailedHTMLProps,
-  DragEvent,
   InputHTMLAttributes,
   useState, } from 'react'
 import cn from 'classnames'
@@ -9,6 +8,7 @@ import styles from './Display.module.css'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { ItemProps } from '../../interfaces/item-props.interface'
 import Line from '../common/Line/Line'
+import DropAreas from '../common/DropAreas/DropAreas'
 
 type DisplayProps = ItemProps &
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -31,22 +31,7 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const dragEndHandler = () => {
     leaveElement()
   }
-  const dragOverHandler = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setIsShown(true)
-    hoverItem(true)
-  }
 
-  const dragLeaveHandler = () => {
-    setIsShown(false)
-    hoverItem(false)
-  }
-  const dropHandler = (e: DragEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    setDragTarget('displayFULL')
-    setIsShown(false)
-    hoverItem(false)
-  }
   const handleRemoveItem = () => {
     removeItem('display')
   }
@@ -73,16 +58,13 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
       })}
       onDoubleClick={inZone && isEditable ? handleRemoveItem : undefined}
     >
-      <div
-        onDragOver={dragOverHandler}
-        onDragLeave={dragLeaveHandler}
-        onDrop={dropHandler}
-        className={cn('dropArea', {
-          [styles.dropAreaFull]: inZone,
-          cursorMove: !inZone,
-          [styles.cursorDisabled]: inZone && isEditable,
-          cursorDefault: inZone && !isEditable,
-        })}
+      <DropAreas
+        item="display"
+        isEditable={isEditable}
+        inZone={inZone}
+        setIsShown={setIsShown}
+        hoverItem={hoverItem}
+        setDragTarget={setDragTarget}
       />
       <input
         type="number"
