@@ -1,14 +1,18 @@
 import { CalcAction, CalcActionTypes, CalcState } from './calc.types'
-import { moveItem } from './move-item'
+import { calculate } from './helpers/calculate'
+import { moveItem } from './helpers/move-item'
 
 const initialState: CalcState = {
   isEditable: true,
   dragZone: [],
   draggedElement: null,
   isFieldHovered: false,
-  currentValue: 0,
+  currentValue: '0',
+  displayedResult: '0',
+  nextNum: '0',
+  operator: null,
   dragTarget: null,
-  itemHovered: false
+  itemHovered: false,
 }
 
 export function CalcReducer(
@@ -23,7 +27,10 @@ export function CalcReducer(
       return {
         ...state,
         isEditable: action.payload,
-        currentValue: 0,
+        displayedResult: '0',
+        currentValue: '0',
+        nextNum: '0',
+        operator: null,
       }
     case CalcActionTypes.TAKE_ELEMENT:
       return {
@@ -79,13 +86,15 @@ export function CalcReducer(
     case CalcActionTypes.REMOVE_ITEM:
       return {
         ...state,
-        dragZone: copy.dragZone.filter((item) => item !== action.payload)
+        dragZone: copy.dragZone.filter((item) => item !== action.payload),
       }
     case CalcActionTypes.HOVER_ITEM:
       return {
         ...state,
         itemHovered: action.payload,
       }
+    case CalcActionTypes.CALCULATE:
+      return calculate(action.payload, copy)
     default:
       return state
   }

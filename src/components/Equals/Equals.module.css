@@ -1,7 +1,8 @@
 .equals {
-  display: inline-block;
+	position: relative;
 
-  margin-bottom: 12px;
-  padding: 4px;
-  position: relative;
+	display: inline-block;
+
+	margin-bottom: 12px;
+	padding: 4px;
 }

@@ -1,37 +1,42 @@
 .line {
-  position: absolute;
-  bottom: -7px;
-  left: 0;
+	position: absolute;
+	bottom: -7px;
+	left: 0;
 
-  background-color: var(--primary);
-  height: 1.5px;
-  border: none;
-  margin: 0 auto;
-  width: 100%;
+	width: 100%;
+	height: 1.5px;
+	margin: 0 auto;
+
+	border: none;
+
+	background-color: var(--primary);
 }
 
 .rhombus {
-  padding: 2px;
-  bottom: -8px;
+	position: absolute;
+	bottom: -8px;
 
-  position: absolute;
-  background-color: var(--primary);
-  transform: rotate(45deg);
+	padding: 2px;
+
+	transform: rotate(45deg);
+
+	background-color: var(--primary);
 }
 
 .leftRhombus {
-  left: 0px;
+	left: 0;
 }
+
 .rightRhombus {
-  right: 0;
+	right: 0;
 }
 
 .lineUp {
-  top: -6px;
-  bottom: initial;
+	top: -6px;
+	bottom: initial;
 }
 
 .rhombusUp {
-  top: -7px;
-  bottom: initial;
+	top: -7px;
+	bottom: initial;
 }

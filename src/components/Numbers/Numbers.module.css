@@ -1,9 +1,10 @@
 .numbers {
-  display: inline-block;
+	position: relative;
 
-  width: 240px;
-  height: 224px;
-  margin-bottom: 12px;
-  padding: 4px;
-  position: relative;
+	display: inline-block;
+
+	width: 240px;
+	height: 224px;
+	margin-bottom: 12px;
+	padding: 4px;
 }

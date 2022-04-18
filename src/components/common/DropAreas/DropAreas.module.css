@@ -1,35 +1,45 @@
 .dropAreaUpEquals {
-  height: 42px;
-  top: -6px;
+	top: -6px;
+
+	height: 42px;
 }
+
 .dropAreaBotEquals {
-  height: 42px;
-  top: 36px;
+	top: 36px;
+
+	height: 42px;
 }
 
 .dropAreaUpNumbers {
-  height: 118px;
-  top: -6px;
+	top: -6px;
+
+	height: 118px;
 }
+
 .dropAreaBotNumbers {
-  height: 118px;
-  top: 112px;
+	top: 112px;
+
+	height: 118px;
 }
 
 .dropAreaUpOperations {
-  height: 35px;
-  top: -6px;
+	top: -6px;
+
+	height: 35px;
 }
+
 .dropAreaBotOperations {
-  height: 35px;
-  top: 29px;
+	top: 29px;
+
+	height: 35px;
 }
 
 .dropAreaFullDisplay {
-  height: 66px;
-  top: 0;
+	top: 0;
+
+	height: 66px;
 }
 
 .cursorDisabledDisplay {
-  cursor: not-allowed;
+	cursor: not-allowed;
 }

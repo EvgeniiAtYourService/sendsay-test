@@ -20,7 +20,10 @@ export interface CalcState {
   dragZone: Array<draggedElement>
   draggedElement: draggedElement
   isFieldHovered: boolean
-  currentValue: number
+  currentValue: string
+  nextNum: string
+  displayedResult: string
+  operator: null | string
   dragTarget: dragTarget
   itemHovered: boolean
 }
@@ -34,6 +37,7 @@ export enum CalcActionTypes {
   DROP_ITEM = 'DROP_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
   HOVER_ITEM = 'HOVER_ITEM',
+  CALCULATE = 'CALCULATE',
 }
 
 interface ToggleSwitcherAction {
@@ -74,6 +78,11 @@ interface hoverItem {
   payload: boolean
 }
 
+interface calculate {
+  type: CalcActionTypes.CALCULATE
+  payload: number | string
+}
+
 export type CalcAction =
   | ToggleSwitcherAction
   | leaveElement
@@ -83,3 +92,4 @@ export type CalcAction =
   | dropItem
   | removeItem
   | hoverItem
+  | calculate

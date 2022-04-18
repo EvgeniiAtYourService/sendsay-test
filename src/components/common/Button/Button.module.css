@@ -1,50 +1,52 @@
 .common {
-  box-sizing: border-box;
-  height: 48px;
-  margin: 0 8px 8px 0;
+	z-index: 10000;
 
-  color: black;
-  border: 1px solid #e2e3e5;
-  border-radius: 6px;
-  background: #fff;
+	box-sizing: border-box;
+	height: 48px;
+	margin: 0 8px 8px 0;
 
-  font-family: var(--inter);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 15px;
-  cursor: move;
-  z-index: 10000;
+	cursor: move;
+
+	color: black;
+	border: 1px solid #E2E3E5;
+	border-radius: 6px;
+	background: #FFF;
+
+	font-family: var(--inter);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 15px;
 }
 
 .s {
-  width: 52px;
+	width: 52px;
 }
 
 .m {
-  width: 72px;
+	width: 72px;
 }
 
 .l {
-  width: 152px;
+	width: 152px;
 }
 
 .xl {
-  width: 232px;
-  height: 64px;
-  margin: 0;
+	width: 232px;
+	height: 64px;
+	margin: 0;
 
-  color: white;
-  background-color: var(--primary);
+	color: white;
+	background-color: var(--primary);
 }
 
 .noRightMargin {
-  margin: 0 0 8px;
+	margin: 0 0 8px;
 }
 
 .cursorPointer {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .cursorPointer:active {
-  border: 2px solid var(--primary);
+	border: 2px solid var(--primary);
 }

@@ -1,4 +1,4 @@
-import { CalcState, draggedElement } from './calc.types'
+import { CalcState, draggedElement } from '../calc.types'
 
 export const moveItem = (
   dropTarget: draggedElement,

@@ -15,8 +15,13 @@ type DisplayProps = ItemProps &
 
 function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
   const [isShown, setIsShown] = useState<boolean>(false)
-  const { currentValue, dragZone, isFieldHovered, draggedElement, isEditable } =
-    useTypedSelector((state) => state.calcState)
+  const {
+    displayedResult,
+    dragZone,
+    isFieldHovered,
+    draggedElement,
+    isEditable,
+  } = useTypedSelector((state) => state.calcState)
   const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
     useActions()
   const dragStartHandler = () => {
@@ -61,11 +66,15 @@ function Display({ isDraggable, inZone, onChange }: DisplayProps): JSX.Element {
         setDragTarget={setDragTarget}
       />
       <input
-        type="number"
+        type="text"
         readOnly
-        value={currentValue}
+        value={displayedResult}
         onChange={onChange}
-        className={styles.display}
+        className={cn(styles.display, {
+          [styles.message]: displayedResult === 'Не определено',
+          [styles.bigNum]: displayedResult.length >= 9,
+          // max 17
+        })}
         draggable={isDraggable}
         onDragStart={dragStartHandler}
         onDragEnd={dragEndHandler}

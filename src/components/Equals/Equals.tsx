@@ -14,8 +14,14 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone, isEditable, draggedElement, isFieldHovered, itemHovered } =
     useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
-    useActions()
+  const {
+    leaveElement,
+    takeElement,
+    setDragTarget,
+    removeItem,
+    hoverItem,
+    calculate,
+  } = useActions()
   const isElementLast = dragZone.indexOf('equals') === dragZone.length - 1
   const notMaxLength = dragZone.length !== 4
   const handleRemoveItem = () => {
@@ -23,7 +29,7 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const handleClick = () => {
     if (inZone) {
-      console.log('=')
+      calculate('=')
     }
   }
   return (
@@ -45,7 +51,6 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
         inZone={inZone}
         dragZone={dragZone}
       >
-
         <DropAreas
           item="equals"
           isEditable={isEditable}
@@ -66,11 +71,10 @@ function Equals({ inZone, isDraggable }: ItemProps): JSX.Element {
         <Line isShown={isShown} up={lineUp} inZone={inZone} />
         <Line
           isShown={
-              isFieldHovered && isElementLast && notMaxLength && !itemHovered
-            }
+            isFieldHovered && isElementLast && notMaxLength && !itemHovered
+          }
           inZone={inZone}
         />
-
       </DraggableItem>
     </div>
   )

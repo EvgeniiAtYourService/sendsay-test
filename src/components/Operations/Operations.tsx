@@ -15,8 +15,14 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   const [lineUp, setLineUp] = useState<boolean>(false)
   const { dragZone, isEditable, draggedElement, isFieldHovered, itemHovered } =
     useTypedSelector((state) => state.calcState)
-  const { leaveElement, takeElement, setDragTarget, removeItem, hoverItem } =
-    useActions()
+  const {
+    leaveElement,
+    takeElement,
+    setDragTarget,
+    removeItem,
+    hoverItem,
+    calculate,
+  } = useActions()
   const isElementLast = dragZone.indexOf('operations') === dragZone.length - 1
   const notMaxLength = dragZone.length !== 4
 
@@ -25,7 +31,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
   }
   const handleClick = (operator: string) => {
     if (inZone) {
-      console.log(operator)
+      calculate(operator)
     }
   }
   return (
@@ -59,6 +65,7 @@ function Operations({ inZone, isDraggable }: ItemProps): JSX.Element {
 
         {buttonValues.map((value) => (
           <Button
+            key={value}
             size="s"
             onClick={() => handleClick(value)}
             pointer={!inZone && dragZone.includes('operations')}

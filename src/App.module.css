@@ -13,7 +13,9 @@
 	flex-direction: column;
 
 	padding: 106px 0 86px 76px;
+
 	transition: opacity 300ms ease-in-out;
+
 	opacity: 1;
 }
 
